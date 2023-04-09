@@ -1,9 +1,10 @@
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_tutorial/controller/cloud_fire_store_provider.dart';
 import 'package:firebase_tutorial/view/screens/main_view/main_view_body.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'controller/auth_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,7 +12,8 @@ Future<void> main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => CloudFireStoreProvider())
+        ChangeNotifierProvider(create: (context) => CloudFireStoreProvider()),
+        ChangeNotifierProvider(create: (context) => AuthProvider())
       ],
       child: const MyApp(),
     ),
@@ -26,7 +28,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.orange,
       ),
       home: const MyHomePage(),
     );

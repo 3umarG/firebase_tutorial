@@ -1,3 +1,4 @@
+import 'package:firebase_tutorial/view/screens/auth/auth_screen.dart';
 import 'package:firebase_tutorial/view/screens/cloud_fire_store_screen/cloud_fire_store_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +19,18 @@ class MainViewBody extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (c) => const CloudFireStoreScreen(),
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          FireBaseOptionButton(
+            title: "Authentication",
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (c) => const AuthScreen(),
               ),
             ),
           ),
