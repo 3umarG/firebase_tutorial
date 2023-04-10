@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthProvider extends ChangeNotifier {
   final _authInstance = FirebaseAuth.instance;
@@ -67,7 +68,7 @@ class AuthProvider extends ChangeNotifier {
 
   Future<void> resetPassword(BuildContext context) async {
     try {
-      final authRes = await _authInstance.sendPasswordResetEmail(email: _email);
+      await _authInstance.sendPasswordResetEmail(email: _email);
 
       const snackBar = SnackBar(
         content: Text("Reset Password Successfully"),
@@ -100,5 +101,26 @@ class AuthProvider extends ChangeNotifier {
   set password(String value) {
     _password = value;
     notifyListeners();
+  }
+
+  Future<UserCredential> signInWithGoogle() async {
+    // Trigger the authentication flow
+    // SignIn with Google
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    // Get the Auth Results after sign in
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+
+    // Create a new credential from information come from auth in the previous step
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    // Sign in to firebase with credential that come form the google
+    return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 }
