@@ -3,6 +3,7 @@ import 'package:firebase_tutorial/view/screens/cloud_fire_store_screen/cloud_fir
 import 'package:flutter/material.dart';
 
 import '../../widgets/fire_base_option_btn.dart';
+import '../real_time_db_screen/real_time_db_screen.dart';
 
 class MainViewBody extends StatelessWidget {
   const MainViewBody({Key? key}) : super(key: key);
@@ -31,6 +32,18 @@ class MainViewBody extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (c) => const AuthScreen(),
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          FireBaseOptionButton(
+            title: "Realtime Database",
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (c) => const RealTimeDatabaseScreen(),
               ),
             ),
           ),
